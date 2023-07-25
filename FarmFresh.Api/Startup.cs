@@ -9,12 +9,31 @@ namespace FarmFresh.Api
     {
         public static Task ConfigureServices(IServiceCollection services, IConfiguration config)
         {
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
             // Add services to the container.
             services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.AddHttpContextAccessor();
+
+            services.AddDbContext<DataContext>(options =>
+            {
+                string connStr;
+
+                if (env == "Development")
+                {
+                    connStr = config.GetConnectionString("DefaultConnection")!;
+                }
+                else
+                {
+                    connStr = Environment.GetEnvironmentVariable("DB_CONN_STR")!;
+                }
+                options.UseSqlServer(connStr);
+            });
 
             services.AddSingleton<SimulationEnvironment>();
             services.AddHostedService<ProductionSimulationService>();

@@ -1,3 +1,5 @@
+using FarmFresh.Api.Entities;
+using FarmFresh.Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace FarmFresh.Api.Data
@@ -8,11 +10,13 @@ namespace FarmFresh.Api.Data
         {
         }
 
-        //public DbSet<Visitor> Visitor { get; set; } = null!;
+        public DbSet<User> User { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            /*********** User **************/
+            builder.Entity<User>()
+                .HasKey(User => User.UserId);
         }
     }
 }

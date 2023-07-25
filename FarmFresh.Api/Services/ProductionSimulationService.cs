@@ -29,6 +29,7 @@ namespace FarmFresh.Api.Services
                 else _environment.Solar.Production = random.NextDouble() * 10;
             }
 
+            // Factories
             Log.Information("Daytime: " + _environment.Day.ToString());
             Log.Information("Solar production: " + _environment.Solar.Production.ToString());
             Log.Information("Wind production: " + _environment.Wind.Production.ToString());
