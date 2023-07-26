@@ -9,12 +9,13 @@ namespace FarmFresh.Api
         public bool Sunny { get; set; }
         public Solar Solar { get; set; }
         public Wind Wind { get; set; }
-        public List<CoalPowerPlant> CoalPowerPlants { get; set; }
-        public List<BaseFactory> Factories { get; set; }
+        // public List<CoalPowerPlant> CoalPowerPlants { get; set; }
+        // public List<BaseFactory> Factories { get; set; }
         public SimulationEnvironment()
         {
             Solar = new Solar();
             Wind = new Wind();
+            /*
             CoalPowerPlants = new List<CoalPowerPlant>()
             {
                 new CoalPowerPlant(),
@@ -29,6 +30,7 @@ namespace FarmFresh.Api
                 new PestAndDiseaseFactory(),
                 new SoilAmendmentsFactory()
             };
+            */
         }
     }
 }

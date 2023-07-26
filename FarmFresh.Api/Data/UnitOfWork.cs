@@ -14,6 +14,11 @@ namespace FarmFresh.Api.Data
         }
 
         public IUserRepository UserRepository => new UserRepository(_context);
+        public ICoalPowerPlantRepository CoalPowerPlantRepository => new CoalPowerPlantRepository(_context);
+        public IOrganicFertilizerFactoryRepository OrganicFertilizerFactoryRepository => new OrganicFertilizerFactoryRepository(_context);
+        public IOrganicSeedsFactoryRepository OrganicSeedsFactoryRepository => new OrganicSeedsFactoryRepository(_context);
+        public IPestAndDiseaseFactoryRepository PestAndDiseaseFactoryRepository => new PestAndDiseaseFactoryRepository(_context);
+        public ISoilAmendmentsFactoryRepository SoilAmendmentsFactoryRepository => new SoilAmendmentsFactoryRepository(_context);
 
         public async Task<bool> Complete()
         {
