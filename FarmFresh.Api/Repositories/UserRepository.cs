@@ -20,5 +20,15 @@ namespace FarmFresh.Api.Repositories
                 .Include(u => u.PestAndDiseaseFactory)
                 .Include(u => u.SoilAmendmentsFactory).ToListAsync();
         }
+        public async Task<User?> GetUserById(int id)
+        {
+            return await Context.User
+                .Include(u => u.CoalPowerPlants)
+                .Include(u => u.OrganicFertilizerFactory)
+                .Include(u => u.OrganicSeedsFactory)
+                .Include(u => u.PestAndDiseaseFactory)
+                .Include(u => u.SoilAmendmentsFactory)
+                .SingleOrDefaultAsync(u => u.UserId == id);
+        }
     }
 }

@@ -19,13 +19,16 @@ namespace FarmFresh.Api.Services
             Random random = new();
             _environment.Day = !_environment.Day;
 
-            _environment.SellPrices = new List<int>()
+            if (_environment.Day)
             {
-                random.Next() * 100,
-                random.Next() * 100,
-                random.Next() * 100,
-                random.Next() * 100
-            };
+                _environment.SellPrices = new List<int>()
+                {
+                    random.Next() * 100,
+                    random.Next() * 100,
+                    random.Next() * 100,
+                    random.Next() * 100
+                };
+            }
 
             return Task.CompletedTask;
         }

@@ -38,13 +38,13 @@ namespace FarmFresh.Api.Services
                 }
 
                 // If usage exceeding production
-                if (totalUsage > totalProduction) user.Balance -= 100;
+                if (totalUsage > totalProduction) user.Balance -= _environment.PowerPrice / 60 * 10 * (totalUsage - totalProduction);
 
                 // Add to factory capacities
-                if (orgFertFact.Active && orgFertFact.Capacity < orgFertFact.MaxCapacity) orgFertFact.Capacity += orgFertFact.Production / 60 * 5;
-                if (orgSeedsFact.Active && orgSeedsFact.Capacity < orgSeedsFact.MaxCapacity) orgSeedsFact.Capacity += orgSeedsFact.Production / 60 * 5;
-                if (pNDFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) pNDFact.Capacity += pNDFact.Production / 60 * 5;
-                if (soilAFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) soilAFact.Capacity += soilAFact.Production / 60 * 5;
+                if (orgFertFact.Active && orgFertFact.Capacity < orgFertFact.MaxCapacity) orgFertFact.Capacity += orgFertFact.Production / 60 * 10;
+                if (orgSeedsFact.Active && orgSeedsFact.Capacity < orgSeedsFact.MaxCapacity) orgSeedsFact.Capacity += orgSeedsFact.Production / 60 * 10;
+                if (pNDFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) pNDFact.Capacity += pNDFact.Production / 60 * 10;
+                if (soilAFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) soilAFact.Capacity += soilAFact.Production / 60 * 10;
 
                 Log.Information("Organic Fert: " + orgFertFact.Capacity);
             }
@@ -78,7 +78,7 @@ namespace FarmFresh.Api.Services
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await RunInBackground(TimeSpan.FromSeconds(5), () =>
+                await RunInBackground(TimeSpan.FromSeconds(10), () =>
                 {
                     Log.Information("Running data simulation service...");
 

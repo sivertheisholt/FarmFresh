@@ -51,7 +51,7 @@ namespace FarmFresh.Api.Services
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await RunInBackground(TimeSpan.FromSeconds(60), () =>
+                await RunInBackground(TimeSpan.FromSeconds(120), () =>
                 {
                     Log.Information("Running environment simulation service...");
 

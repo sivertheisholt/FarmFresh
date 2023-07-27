@@ -33,9 +33,9 @@ You can create a truly transformative system for FarmFresh that not only enhance
 ## Technical documentation
 Simulation runs at 60x speed. 1 Second in real life is 1 minute in simulation.
 Day/Night cycles updates every 720 seconds.
-Environment updates every 60 seconds.
-Production updates every 10 seconds
-Data/Endpoints updates every 5 seconds.
+Environment updates every 120 seconds.
+Production updates every 60 seconds
+Data/Endpoints updates every 10 seconds.
 
 ### Environment
 

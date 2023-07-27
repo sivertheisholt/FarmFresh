@@ -29,6 +29,9 @@ namespace FarmFresh.Api.Services
                 else _environment.Solar.Production = random.NextDouble() * 50;
             }
 
+            // Power price
+            _environment.PowerPrice = random.NextDouble() * (10 - 1) + 1;
+
             // Factories
             Log.Information("Daytime: " + _environment.Day.ToString());
             Log.Information("Solar production: " + _environment.Solar.Production.ToString());
@@ -63,7 +66,7 @@ namespace FarmFresh.Api.Services
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await RunInBackground(TimeSpan.FromSeconds(10), () =>
+                await RunInBackground(TimeSpan.FromSeconds(60), () =>
                 {
                     Log.Information("Running production simulation service...");
 

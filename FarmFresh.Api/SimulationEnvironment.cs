@@ -9,6 +9,7 @@ namespace FarmFresh.Api
         public bool Sunny { get; set; }
         public Solar Solar { get; set; }
         public Wind Wind { get; set; }
+        public double PowerPrice { get; set; } // nok/kWh
         public List<int> SellPrices { get; set; } // Organic Fertilizer factory, Organic Seeds Factory, Pest And Dieseases Factory, Soil Amendments Factory
         public SimulationEnvironment()
         {

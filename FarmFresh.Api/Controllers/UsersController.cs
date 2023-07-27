@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FarmFresh.Api.Controllers
 {
-    public class UserController : BaseController<UserController>
+    public class UsersController : BaseController<UsersController>
     {
-        public UserController(IConfiguration config, IUnitOfWork unitOfWork) : base(config, unitOfWork)
+        public UsersController(IConfiguration config, IUnitOfWork unitOfWork) : base(config, unitOfWork)
         {
         }
 
