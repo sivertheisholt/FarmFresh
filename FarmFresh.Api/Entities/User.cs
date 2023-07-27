@@ -7,6 +7,9 @@ namespace FarmFresh.Api.Entities
         public required string GroupName { get; set; }
         public double Balance { get; set; }
         public required List<CoalPowerPlant> CoalPowerPlants { get; set; }
-        public required List<BaseFactory> Factories { get; set; }
+        public required OrganicFertilizerFactory OrganicFertilizerFactory { get; set; }
+        public required OrganicSeedsFactory OrganicSeedsFactory { get; set; }
+        public required PestAndDiseaseFactory PestAndDiseaseFactory { get; set; }
+        public required SoilAmendmentsFactory SoilAmendmentsFactory { get; set; }
     }
 }

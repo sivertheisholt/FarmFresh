@@ -19,14 +19,14 @@ namespace FarmFresh.Api.Services
             Random random = new();
 
             // Wind
-            if (_environment.Windy) _environment.Wind.Production = random.NextDouble() * (30.0 - 20) + 20;
-            else _environment.Wind.Production = random.NextDouble() * 15.0;
+            if (_environment.Windy) _environment.Wind.Production = random.NextDouble() * (150.0 - 75) + 75;
+            else _environment.Wind.Production = random.NextDouble() * 75.0;
 
             // Solar
             if (_environment.Day)
             {
-                if (_environment.Sunny) _environment.Solar.Production = random.NextDouble() * (20.0 - 10) + 10;
-                else _environment.Solar.Production = random.NextDouble() * 10;
+                if (_environment.Sunny) _environment.Solar.Production = random.NextDouble() * (100.0 - 50) + 50;
+                else _environment.Solar.Production = random.NextDouble() * 50;
             }
 
             // Factories

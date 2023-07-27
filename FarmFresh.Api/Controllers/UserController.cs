@@ -1,4 +1,3 @@
-using System.Reflection;
 using FarmFresh.Api.DTOs;
 using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
@@ -22,45 +21,33 @@ namespace FarmFresh.Api.Controllers
                 new CoalPowerPlant(),
                 new CoalPowerPlant()
             };
-            var factories = new List<BaseFactory>()
-            {
-                new OrganicFertilizerFactory(),
-                new OrganicSeedsFactory(),
-                new PestAndDiseaseFactory(),
-                new SoilAmendmentsFactory()
-            };
+            var organicFertilizerFactory = new OrganicFertilizerFactory();
+            var organicSeedsFactory = new OrganicSeedsFactory();
+            var pestAndDiseaseFactory = new PestAndDiseaseFactory();
+            var soilAmendmentsFactory = new SoilAmendmentsFactory();
 
             var user = new User()
             {
                 UserUUID = newUserDto.UUID,
                 GroupName = newUserDto.GroupName,
-                Factories = factories,
-                CoalPowerPlants = plants
+                CoalPowerPlants = plants,
+                OrganicFertilizerFactory = organicFertilizerFactory,
+                OrganicSeedsFactory = organicSeedsFactory,
+                PestAndDiseaseFactory = pestAndDiseaseFactory,
+                SoilAmendmentsFactory = soilAmendmentsFactory
             };
 
             foreach (var plant in plants)
             {
                 UnitOfWork.CoalPowerPlantRepository.Add(plant);
             }
-            foreach (var factory in factories)
-            {
-                Type unitOfWorkType = UnitOfWork.GetType();
-                Type factoryType = factory.GetType();
-
-                PropertyInfo? propertyInfo = unitOfWorkType.GetProperty(factoryType.Name + "Repository");
-                if (propertyInfo != null)
-                {
-                    object? repository = propertyInfo.GetValue(unitOfWorkType); // Get the InnerObject
-                    if (repository != null)
-                    {
-                        Type innerType = repository.GetType();
-                        MethodInfo? innerProperty = innerType.GetMethod("Add");
-                        innerProperty?.Invoke(innerType, new object[] { factory });
-                    }
-                }
-            }
+            UnitOfWork.OrganicFertilizerFactoryRepository.Add(organicFertilizerFactory);
+            UnitOfWork.OrganicSeedsFactoryRepository.Add(organicSeedsFactory);
+            UnitOfWork.PestAndDiseaseFactoryRepository.Add(pestAndDiseaseFactory);
+            UnitOfWork.SoilAmendmentsFactoryRepository.Add(soilAmendmentsFactory);
 
             UnitOfWork.UserRepository.Add(user);
+
             await UnitOfWork.Complete();
             return Ok();
         }

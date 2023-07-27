@@ -1,6 +1,7 @@
 using FarmFresh.Api.Data;
 using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace FarmFresh.Api.Repositories
 {
@@ -8,6 +9,16 @@ namespace FarmFresh.Api.Repositories
     {
         public UserRepository(DataContext context) : base(context)
         {
+        }
+
+        public async Task<List<User>> GetAll()
+        {
+            return await Context.User
+                .Include(u => u.CoalPowerPlants)
+                .Include(u => u.OrganicFertilizerFactory)
+                .Include(u => u.OrganicSeedsFactory)
+                .Include(u => u.PestAndDiseaseFactory)
+                .Include(u => u.SoilAmendmentsFactory).ToListAsync();
         }
     }
 }

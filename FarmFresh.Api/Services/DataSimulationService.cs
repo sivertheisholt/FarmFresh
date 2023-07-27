@@ -1,3 +1,4 @@
+using FarmFresh.Api.Interfaces;
 using Serilog;
 
 namespace FarmFresh.Api.Services
@@ -14,10 +15,40 @@ namespace FarmFresh.Api.Services
             _scopeFactory = scopeFactory;
         }
 
-        public Task Simulate()
+        public async Task Simulate(IUnitOfWork unitOfWork)
         {
+            var users = await unitOfWork.UserRepository.GetAll();
+            foreach (var user in users)
+            {
+                var orgFertFact = user.OrganicFertilizerFactory;
+                var orgSeedsFact = user.OrganicSeedsFactory;
+                var pNDFact = user.PestAndDiseaseFactory;
+                var soilAFact = user.SoilAmendmentsFactory;
 
-            return Task.CompletedTask;
+                var totalUsage = (orgFertFact.Active ? orgFertFact.PowerUsage : 0)
+                                    + (orgSeedsFact.Active ? orgSeedsFact.PowerUsage : 0)
+                                    + (pNDFact.Active ? pNDFact.PowerUsage : 0)
+                                    + (soilAFact.Active ? soilAFact.PowerUsage : 0);
+                var totalProduction = 0.0;
+
+                // Calculate power plant power
+                foreach (var coalPowerPlant in user.CoalPowerPlants)
+                {
+                    totalProduction += coalPowerPlant.Active ? coalPowerPlant.Production : 0.0;
+                }
+
+                // If usage exceeding production
+                if (totalUsage > totalProduction) user.Balance -= 100;
+
+                // Add to factory capacities
+                if (orgFertFact.Active && orgFertFact.Capacity < orgFertFact.MaxCapacity) orgFertFact.Capacity += orgFertFact.Production / 60 * 5;
+                if (orgSeedsFact.Active && orgSeedsFact.Capacity < orgSeedsFact.MaxCapacity) orgSeedsFact.Capacity += orgSeedsFact.Production / 60 * 5;
+                if (pNDFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) pNDFact.Capacity += pNDFact.Production / 60 * 5;
+                if (soilAFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) soilAFact.Capacity += soilAFact.Production / 60 * 5;
+
+                Log.Information("Organic Fert: " + orgFertFact.Capacity);
+            }
+            await unitOfWork.Complete();
         }
         private static async Task RunInBackground(TimeSpan timeSpan, Action action, CancellationToken cancellationToken)
         {
@@ -34,7 +65,8 @@ namespace FarmFresh.Api.Services
             using var scope = _scopeFactory.CreateScope();
             try
             {
-                await Simulate();
+                var unitOfWork = scope.ServiceProvider.GetService<IUnitOfWork>();
+                await Simulate(unitOfWork!);
             }
             catch (Exception e)
             {
@@ -46,7 +78,7 @@ namespace FarmFresh.Api.Services
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await RunInBackground(TimeSpan.FromSeconds(1), () =>
+                await RunInBackground(TimeSpan.FromSeconds(5), () =>
                 {
                     Log.Information("Running data simulation service...");
 

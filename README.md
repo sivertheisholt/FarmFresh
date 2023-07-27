@@ -7,32 +7,73 @@ FarmFresh Organix is a company that specializes in producing and supplying organ
 
     The company produces a range of organic fertilizers made from natural sources such as compost, animal manure, and plant-based materials. These fertilizers enrich the soil with essential nutrients, promoting healthy plant growth without the use of synthetic chemicals.
 
--	Soil Amendments
+-	Organic seeds and seedlings
 
-    FarmFresh Organix offers various soil amendments like compost, vermicompost, and biochar, which improve soil structure, enhance water retention, and foster a conducive environment for beneficial soil organisms.
+    FarmFresh Organix may offer a selection of organic seeds and seedlings to support sustainable farming and gardening practices.
 
 -	Pest and disease control	
 
     The company provides organic solutions for pest and disease management in agriculture. This may include natural repellents, beneficial insects, or organic plant extracts that help protect crops without harming the environment or beneficial organisms.
 
--	Organic seeds and seedlings
+-	Soil Amendments
 
-    FarmFresh Organix may offer a selection of organic seeds and seedlings to support sustainable farming and gardening practices.
+    FarmFresh Organix offers various soil amendments like compost, vermicompost, and biochar, which improve soil structure, enhance water retention, and foster a conducive environment for beneficial soil organisms.
 
 ## Electricity
 - Solar
 - Wind
-- Coal factory
+- Coal power plant
 
-## Electricity capacity
-- Capacity
-- Usage
+## Task
+
+FarmFresh is seeking to revolutionize their operations by transitioning from a manual system to an efficient and user-friendly digital system. As their expert consultant, your mission is to design and implement a cutting-edge solution that streamlines tasks, enhances productivity, and reduces long-term costs.
+
+You can create a truly transformative system for FarmFresh that not only enhances the operators' efficiency but also contributes to the company's long-term success and sustainability.
 
 ## Technical documentation
-Simuleringen kjører på 60 ganger hastighet, dvs. at 1 sekund i virkeligheten er 1 minutt i simuleringen.
-Dag/natt syklus blir oppdatert hvert 720 sekund.
-Miljøet blir opppdatert hvert 60 sekund.
-Produksjon blir oppdatert hvert 10 sekund.
-Endepunktene oppdaterer seg i sanntid med simuleringen.
+Simulation runs at 60x speed. 1 Second in real life is 1 minute in simulation.
+Day/Night cycles updates every 720 seconds.
+Environment updates every 60 seconds.
+Production updates every 10 seconds
+Data/Endpoints updates every 5 seconds.
 
-Coal Power Plant costs 1000 nok/
+### Environment
+
+Environment contains different the following states:
+- Day/Night
+- Sunny/Cloudy
+- Windy/Still
+- Power price
+- Sell price
+
+### Power
+
+1x Solar:
+- Max 100 kWh
+
+1x Wind:
+- Max 150 kWh
+
+4x Coal Power Plant:
+- Max 150 kWh
+- Costs 500 NOK /h
+
+### Factories
+
+Organic fertilizer factory:
+- Uses 200 kWh
+- Produces 1t/h
+
+Organic seeds factory:
+- Uses 180 kWh
+- Produces 1t/h
+
+Pest and disease factory:
+- Uses 220 kWh
+- Produces 1t/h
+
+Soil amendments factory:
+- Uses 190 kWh
+- produces 1t/h
+
+

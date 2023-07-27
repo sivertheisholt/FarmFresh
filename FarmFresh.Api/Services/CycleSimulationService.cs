@@ -16,7 +16,16 @@ namespace FarmFresh.Api.Services
 
         public Task Simulate()
         {
+            Random random = new();
             _environment.Day = !_environment.Day;
+
+            _environment.SellPrices = new List<int>()
+            {
+                random.Next() * 100,
+                random.Next() * 100,
+                random.Next() * 100,
+                random.Next() * 100
+            };
 
             return Task.CompletedTask;
         }

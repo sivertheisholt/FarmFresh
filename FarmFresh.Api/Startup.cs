@@ -1,4 +1,5 @@
 using FarmFresh.Api.Data;
+using FarmFresh.Api.Interfaces;
 using FarmFresh.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -35,9 +36,12 @@ namespace FarmFresh.Api
                 options.UseSqlServer(connStr);
             });
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<SimulationEnvironment>();
+            services.AddHostedService<CycleSimulationService>();
             services.AddHostedService<ProductionSimulationService>();
             services.AddHostedService<EnvironmentSimulationService>();
+            services.AddHostedService<DataSimulationService>();
 
             return Task.CompletedTask;
         }

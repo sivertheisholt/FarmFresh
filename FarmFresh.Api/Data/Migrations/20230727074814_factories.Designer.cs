@@ -4,6 +4,7 @@ using FarmFresh.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarmFresh.Api.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230727074814_factories")]
+    partial class factories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,20 +63,11 @@ namespace FarmFresh.Api.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Capacity")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MaxCapacity")
-                        .HasColumnType("float");
-
                     b.Property<double>("PowerUsage")
                         .HasColumnType("float");
 
                     b.Property<int>("Production")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Selling")
-                        .HasColumnType("bit");
 
                     b.HasKey("FactoryId");
 
@@ -91,20 +85,11 @@ namespace FarmFresh.Api.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Capacity")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MaxCapacity")
-                        .HasColumnType("float");
-
                     b.Property<double>("PowerUsage")
                         .HasColumnType("float");
 
                     b.Property<int>("Production")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Selling")
-                        .HasColumnType("bit");
 
                     b.HasKey("FactoryId");
 
@@ -122,20 +107,11 @@ namespace FarmFresh.Api.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Capacity")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MaxCapacity")
-                        .HasColumnType("float");
-
                     b.Property<double>("PowerUsage")
                         .HasColumnType("float");
 
                     b.Property<int>("Production")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Selling")
-                        .HasColumnType("bit");
 
                     b.HasKey("FactoryId");
 
@@ -153,20 +129,11 @@ namespace FarmFresh.Api.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Capacity")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MaxCapacity")
-                        .HasColumnType("float");
-
                     b.Property<double>("PowerUsage")
                         .HasColumnType("float");
 
                     b.Property<int>("Production")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Selling")
-                        .HasColumnType("bit");
 
                     b.HasKey("FactoryId");
 
