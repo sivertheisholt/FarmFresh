@@ -28,6 +28,7 @@ namespace FarmFresh.Api.Services
                 if (_environment.Sunny) _environment.Solar.Production = random.NextDouble() * (100.0 - 50) + 50;
                 else _environment.Solar.Production = random.NextDouble() * 50;
             }
+            else _environment.Solar.Production = 0;
 
             // Power price
             _environment.PowerPrice = random.NextDouble() * (5 - 1) + 1;
