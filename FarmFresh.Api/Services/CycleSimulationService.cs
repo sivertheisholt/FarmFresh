@@ -21,12 +21,12 @@ namespace FarmFresh.Api.Services
 
             if (_environment.Day)
             {
-                _environment.SellPrices = new List<int>()
+                _environment.SellPrices = new List<double>()
                 {
-                    random.Next() * 100,
-                    random.Next() * 100,
-                    random.Next() * 100,
-                    random.Next() * 100
+                    random.NextDouble() * (500.0 - 100) + 100,
+                    random.NextDouble() * (500.0 - 100) + 100,
+                    random.NextDouble() * (500.0 - 100) + 100,
+                    random.NextDouble() * (500.0 - 100) + 100
                 };
             }
 

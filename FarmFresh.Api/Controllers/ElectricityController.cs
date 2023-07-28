@@ -1,5 +1,6 @@
 using FarmFresh.Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace FarmFresh.Api.Controllers
 {
@@ -12,12 +13,12 @@ namespace FarmFresh.Api.Controllers
         }
 
         [HttpGet("solar")]
-        public async Task<ActionResult> GetSolar()
+        public ActionResult GetSolar()
         {
             return Ok(_simulationEnvironment.Solar);
         }
         [HttpGet("wind")]
-        public async Task<ActionResult> GetWind()
+        public ActionResult GetWind()
         {
             return Ok(_simulationEnvironment.Wind);
         }
@@ -30,5 +31,41 @@ namespace FarmFresh.Api.Controllers
             return Ok(user.CoalPowerPlants);
         }
 
+        [HttpPatch("coal/activate")]
+        public async Task<ActionResult> ActivateCoalPlant([FromQuery] int id)
+        {
+            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            if (user == null) return NotFound();
+
+            try
+            {
+                user.CoalPowerPlants[id].Active = true;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Invalid id");
+                return BadRequest("Invalid id");
+            }
+
+            return Ok();
+        }
+        [HttpPatch("coal/deactivate")]
+        public async Task<ActionResult> DeactivateCoalPlant([FromQuery] int id)
+        {
+            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            if (user == null) return NotFound();
+
+            try
+            {
+                user.CoalPowerPlants[id].Active = false;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Invalid id");
+                return BadRequest("Invalid id");
+            }
+
+            return Ok();
+        }
     }
 }

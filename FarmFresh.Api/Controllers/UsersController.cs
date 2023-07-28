@@ -1,3 +1,4 @@
+using System.Text.Json;
 using FarmFresh.Api.DTOs;
 using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
@@ -7,8 +8,106 @@ namespace FarmFresh.Api.Controllers
 {
     public class UsersController : BaseController<UsersController>
     {
-        public UsersController(IConfiguration config, IUnitOfWork unitOfWork) : base(config, unitOfWork)
+        private readonly SimulationEnvironment _simulationEnvironment;
+        public UsersController(IConfiguration config, IUnitOfWork unitOfWork, SimulationEnvironment simulationEnvironment) : base(config, unitOfWork)
         {
+            _simulationEnvironment = simulationEnvironment;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetUser()
+        {
+            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            if (user == null) return NotFound();
+
+            var userJson = JsonSerializer.Serialize(user);
+            return Ok(JsonSerializer.Deserialize<UserDto>(userJson));
+        }
+
+        [HttpPatch("storage/sell")]
+        public async Task<ActionResult> Sell([FromQuery] int id)
+        {
+            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            if (user == null) return NotFound();
+
+            var price = _simulationEnvironment.SellPrices[id];
+            switch (id)
+            {
+                case 0:
+                    user.Balance += user.OrganicFertilizerFactory.Capacity * price;
+                    user.OrganicFertilizerFactory.Capacity = 0;
+                    break;
+                case 1:
+                    user.Balance += user.OrganicSeedsFactory.Capacity * price;
+                    user.OrganicSeedsFactory.Capacity = 0;
+                    break;
+                case 2:
+                    user.Balance += user.PestAndDiseaseFactory.Capacity * price;
+                    user.PestAndDiseaseFactory.Capacity = 0;
+                    break;
+                case 3:
+                    user.Balance += user.SoilAmendmentsFactory.Capacity * price;
+                    user.SoilAmendmentsFactory.Capacity = 0;
+                    break;
+                default:
+                    return BadRequest("Invalid id");
+            }
+            await UnitOfWork.Complete();
+            return Ok();
+        }
+        [HttpPatch("factory/activate")]
+        public async Task<ActionResult> ActivateFactory([FromQuery] int id)
+        {
+            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            if (user == null) return NotFound();
+
+            switch (id)
+            {
+                case 0:
+                    user.OrganicFertilizerFactory.Active = true;
+                    break;
+                case 1:
+                    user.OrganicSeedsFactory.Active = true;
+                    break;
+                case 2:
+                    user.PestAndDiseaseFactory.Active = true;
+                    break;
+                case 3:
+                    user.SoilAmendmentsFactory.Active = true;
+                    break;
+                default:
+                    return BadRequest("Invalid id");
+            }
+
+            await UnitOfWork.Complete();
+            return Ok();
+        }
+        [HttpPatch("factory/deactivate")]
+        public async Task<ActionResult> DeactivateFactory([FromQuery] int id)
+        {
+            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            if (user == null) return NotFound();
+
+            switch (id)
+            {
+                case 0:
+                    user.OrganicFertilizerFactory.Active = false;
+                    break;
+                case 1:
+                    user.OrganicSeedsFactory.Active = false;
+                    break;
+                case 2:
+                    user.PestAndDiseaseFactory.Active = false;
+                    break;
+                case 3:
+                    user.SoilAmendmentsFactory.Active = false;
+                    break;
+                default:
+                    return BadRequest("Invalid id");
+            }
+
+            await UnitOfWork.Complete();
+            return Ok();
         }
 
         [HttpPost]

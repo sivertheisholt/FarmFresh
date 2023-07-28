@@ -44,7 +44,7 @@ Environment contains different the following states:
 - Sunny/Cloudy
 - Windy/Still
 - Power price
-- Sell price
+- Sell prices
 
 ### Power
 
@@ -55,8 +55,8 @@ Environment contains different the following states:
 - Max 150 kWh
 
 4x Coal Power Plant:
-- Max 150 kWh
-- Costs 500 NOK /h
+- Max 130 kWh
+- Costs 400 NOK /h
 
 ### Factories
 

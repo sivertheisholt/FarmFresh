@@ -5,6 +5,6 @@ namespace FarmFresh.Api.Entities
         public int PlantId { get; set; }
         public double Production { get; set; } = 130;
         public bool Active { get; set; }
-        public double Price { get; set; } = 500; // Price in nok per hour
+        public double Price { get; set; } = 400; // Price in nok per hour
     }
 }

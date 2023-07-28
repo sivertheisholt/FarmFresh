@@ -31,22 +31,30 @@ namespace FarmFresh.Api.Services
                                     + (soilAFact.Active ? soilAFact.PowerUsage : 0);
                 var totalProduction = 0.0;
 
+                totalProduction += _environment.Wind.Production;
+                totalProduction += _environment.Solar.Production;
+
                 // Calculate power plant power
                 foreach (var coalPowerPlant in user.CoalPowerPlants)
                 {
-                    totalProduction += coalPowerPlant.Active ? coalPowerPlant.Production : 0.0;
+                    if (coalPowerPlant.Active)
+                    {
+                        totalProduction += coalPowerPlant.Production;
+                        user.Balance -= coalPowerPlant.Price / 60 * 10;
+                    }
                 }
 
                 // If usage exceeding production
                 if (totalUsage > totalProduction) user.Balance -= _environment.PowerPrice / 60 * 10 * (totalUsage - totalProduction);
+
+                // If usage lower than production
+                if (totalUsage < totalProduction) user.Balance += _environment.PowerPrice / 60 * 10 * (totalProduction - totalUsage);
 
                 // Add to factory capacities
                 if (orgFertFact.Active && orgFertFact.Capacity < orgFertFact.MaxCapacity) orgFertFact.Capacity += orgFertFact.Production / 60 * 10;
                 if (orgSeedsFact.Active && orgSeedsFact.Capacity < orgSeedsFact.MaxCapacity) orgSeedsFact.Capacity += orgSeedsFact.Production / 60 * 10;
                 if (pNDFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) pNDFact.Capacity += pNDFact.Production / 60 * 10;
                 if (soilAFact.Active && pNDFact.Capacity < pNDFact.MaxCapacity) soilAFact.Capacity += soilAFact.Production / 60 * 10;
-
-                Log.Information("Organic Fert: " + orgFertFact.Capacity);
             }
             await unitOfWork.Complete();
         }

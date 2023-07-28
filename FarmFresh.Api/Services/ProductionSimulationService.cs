@@ -30,7 +30,7 @@ namespace FarmFresh.Api.Services
             }
 
             // Power price
-            _environment.PowerPrice = random.NextDouble() * (10 - 1) + 1;
+            _environment.PowerPrice = random.NextDouble() * (5 - 1) + 1;
 
             // Factories
             Log.Information("Daytime: " + _environment.Day.ToString());
