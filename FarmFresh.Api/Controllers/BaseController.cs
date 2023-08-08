@@ -1,8 +1,11 @@
+using FarmFresh.Api.Attributes;
 using FarmFresh.Api.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FarmFresh.Api.Controllers
 {
+    [ApiKey]
     [ApiController]
     [Route("api/[controller]")]
     public class BaseController<T> : ControllerBase

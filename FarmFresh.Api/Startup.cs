@@ -65,8 +65,6 @@ namespace FarmFresh.Api
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
             app.MapControllers();
 
             return Task.CompletedTask;

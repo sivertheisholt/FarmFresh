@@ -2,6 +2,7 @@ using System.Text.Json;
 using FarmFresh.Api.DTOs;
 using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FarmFresh.Api.Controllers
@@ -110,6 +111,7 @@ namespace FarmFresh.Api.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> CreateUser(NewUserDto newUserDto)
         {
