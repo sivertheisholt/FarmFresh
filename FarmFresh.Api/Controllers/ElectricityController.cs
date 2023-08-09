@@ -40,6 +40,7 @@ namespace FarmFresh.Api.Controllers
             try
             {
                 user.CoalPowerPlants[id].Active = true;
+                await UnitOfWork.Complete();
             }
             catch (Exception e)
             {
@@ -58,6 +59,7 @@ namespace FarmFresh.Api.Controllers
             try
             {
                 user.CoalPowerPlants[id].Active = false;
+                await UnitOfWork.Complete();
             }
             catch (Exception e)
             {
