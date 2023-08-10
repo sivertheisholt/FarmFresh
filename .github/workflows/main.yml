@@ -28,7 +28,7 @@ jobs:
       - name: dotnet build and publish
         run: |
           dotnet restore
-          dotnet build ./Bouvet-Shenanigans.Api/Bouvet-Shenanigans.Api.csproj --configuration Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
+          dotnet build ./FarmFresh.Api/FarmFresh.Api.csproj --configuration Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
           dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
       # Deploy to Azure Web apps
