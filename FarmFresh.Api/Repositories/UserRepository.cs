@@ -30,5 +30,15 @@ namespace FarmFresh.Api.Repositories
                 .Include(u => u.SoilAmendmentsFactory)
                 .SingleOrDefaultAsync(u => u.UserId == id);
         }
+        public async Task<User?> GetUserByUid(string uid)
+        {
+           return await Context.User
+                .Include(u => u.CoalPowerPlants)
+                .Include(u => u.OrganicFertilizerFactory)
+                .Include(u => u.OrganicSeedsFactory)
+                .Include(u => u.PestAndDiseaseFactory)
+                .Include(u => u.SoilAmendmentsFactory)
+                .SingleOrDefaultAsync(u => u.UserUUID == uid);
+        }
     }
 }

@@ -14,7 +14,8 @@ namespace FarmFresh.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetFactories()
         {
-            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
+            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
             if (user == null) return NotFound();
             List<FactoryDto> factories = new();
 

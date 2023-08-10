@@ -25,7 +25,8 @@ namespace FarmFresh.Api.Controllers
         [HttpGet("coal")]
         public async Task<ActionResult> GetCoalPowerPlants()
         {
-            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
+            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
             if (user == null) return NotFound();
 
             return Ok(user.CoalPowerPlants);
@@ -34,7 +35,8 @@ namespace FarmFresh.Api.Controllers
         [HttpPatch("coal/activate")]
         public async Task<ActionResult> ActivateCoalPlant([FromQuery] int id)
         {
-            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
+            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
             if (user == null) return NotFound();
 
             try
@@ -53,7 +55,8 @@ namespace FarmFresh.Api.Controllers
         [HttpPatch("coal/deactivate")]
         public async Task<ActionResult> DeactivateCoalPlant([FromQuery] int id)
         {
-            var user = await UnitOfWork.UserRepository.GetUserById(1);
+            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
+            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
             if (user == null) return NotFound();
 
             try

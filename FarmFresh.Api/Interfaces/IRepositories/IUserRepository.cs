@@ -6,5 +6,6 @@ namespace FarmFresh.Api.Interfaces.IRepositories
     {
         Task<List<User>> GetAll();
         Task<User?> GetUserById(int id);
+        Task<User?> GetUserByUid(string uid);
     }
 }
