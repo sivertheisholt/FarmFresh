@@ -37,6 +37,8 @@ Environment updates every 120 seconds.
 Production updates every 60 seconds
 Data/Endpoints updates every 10 seconds.
 
+You can find the API documentation over at /swagger
+
 ### Environment
 
 Environment contains different the following states:
@@ -75,5 +77,6 @@ Pest and disease factory:
 Soil amendments factory:
 - Uses 190 kWh
 - produces 1t/h
+
 
 
