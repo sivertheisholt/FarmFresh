@@ -115,10 +115,11 @@ namespace FarmFresh.Api.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> CreateUser(NewUserDto newUserDto)
         {
+            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
+            if (!extractedApiKey.Equals(Config["ApiKeyAdmin"])) return Unauthorized();
             var plants = new List<CoalPowerPlant>()
             {
                 new CoalPowerPlant(),
