@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FarmFresh.Api.Controllers
 {
-    public class ProductController : BaseController<ProductController>
+    public class ProductsController : BaseController<ProductsController>
     {
         private readonly SimulationEnvironment _simulationEnvironment;
-        public ProductController(IConfiguration config, IUnitOfWork unitOfWork, SimulationEnvironment simulationEnvironment) : base(config, unitOfWork)
+        public ProductsController(IConfiguration config, IUnitOfWork unitOfWork, SimulationEnvironment simulationEnvironment) : base(config, unitOfWork)
         {
             _simulationEnvironment = simulationEnvironment;
         }
