@@ -1,6 +1,6 @@
-# FarmFresh
+# FarmFresh - English
 
-FarmFresh Organix is a company that specializes in producing and supplying organic agricultural products and solutions. With a focus on sustainable and eco-friendly farming practices, FarmFresh Organix aims to provide high-quality organic products to farmers, gardeners, and agricultural businesses.
+FarmFresh is a company that specializes in producing and supplying organic agricultural products and solutions. With a focus on sustainable and eco-friendly farming practices, FarmFresh aims to provide high-quality organic products to farmers, gardeners, and agricultural businesses.
 
 ## Processes
 -	Organic fertilizers
@@ -9,7 +9,7 @@ FarmFresh Organix is a company that specializes in producing and supplying organ
 
 -	Organic seeds and seedlings
 
-    FarmFresh Organix may offer a selection of organic seeds and seedlings to support sustainable farming and gardening practices.
+    FarmFresh may offer a selection of organic seeds and seedlings to support sustainable farming and gardening practices.
 
 -	Pest and disease control	
 
@@ -17,7 +17,7 @@ FarmFresh Organix is a company that specializes in producing and supplying organ
 
 -	Soil Amendments
 
-    FarmFresh Organix offers various soil amendments like compost, vermicompost, and biochar, which improve soil structure, enhance water retention, and foster a conducive environment for beneficial soil organisms.
+    FarmFresh offers various soil amendments like compost, vermicompost, and biochar, which improve soil structure, enhance water retention, and foster a conducive environment for beneficial soil organisms.
 
 ## Electricity
 - Solar
@@ -79,4 +79,83 @@ Soil amendments factory:
 - produces 1t/h
 
 
+# FarmFresh - Norwegian
+
+FarmFresh er et selskap som spesialiserer seg på produksjon og levering av økologiske landbruksprodukter og løsninger. Med fokus på bærekraftige og miljøvennlige jordbrukspraksiser har FarmFresh som mål å tilby høykvalitets økologiske produkter til bønder, hageentusiaster og landbruksbedrifter.
+
+## Prosesser
+-	Organiske gjødselsmidler
+
+    Selskapet produserer et utvalg av organiske gjødselsmidler laget av naturlige kilder som kompost, dyregjødsel og plantebaserte materialer. Disse gjødselsmidlene beriker jorden med essensielle næringsstoffer og fremmer sunn plantevekst uten bruk av syntetiske kjemikalier.
+
+-	Økologiske frø og småplanter
+
+    FarmFresh kan tilby et utvalg av økologiske frø og småplanter for å støtte bærekraftige landbruks- og hagepraksiser.
+
+-	Skadedyr- og sykdomskontroll	
+
+    Selskapet tilbyr økologiske løsninger for skadedyr- og sykdomsforvaltning innen jordbruk. Dette kan inkludere naturlige avstøtende midler, nyttige insekter eller økologiske planteekstrakter som hjelper til med å beskytte avlinger uten å skade miljøet eller nyttige organismer.
+
+-	Jordforbedringer
+
+    FarmFresh tilbyr ulike jordforbedringer som kompost, meitemarkkompost og biokull, som forbedrer jordstrukturen, øker vannretensjonen og skaper en gunstig miljø for nyttige jordorganismer.
+
+## Elektrisitet
+- Sol
+- Vind
+- Kullkraftverk
+
+## Oppgave
+
+FarmFresh ønsker å revolusjonere sin virksomhet ved å gå over fra et manuelt system til et effektivt og brukervennlig digitalt system. Som deres ekspertkonsulent er din oppgave å designe og implementere en banebrytende løsning som effektiviserer oppgaver, øker produktiviteten og reduserer langsiktige kostnader.
+
+Du kan skape et virkelig transformasjonssystem for FarmFresh som ikke bare forbedrer operatørenes effektivitet, men også bidrar til selskapets langsiktige suksess og bærekraft.
+
+## Teknisk dokumentasjon
+Simuleringen kjører med 60 ganger hastighet. 1 sekund i virkeligheten tilsvarer 1 minutt i simuleringen.
+Dag/natt-syklusene oppdateres hver 720. sekund.
+Miljøet oppdateres hver 120. sekund.
+Produksjonen oppdateres hver 60. sekund.
+Data/sluttpunkter oppdateres hver 10. sekund.
+
+Du finner API-dokumentasjonen på /swagger.
+
+### Environment
+
+Miljøet inneholder ulike tilstander:
+- Dag/natt
+- Solrik/overskyet
+- Vindfullt/rolig
+- Strømpris
+- Salgspriser
+
+### Strøm
+
+1x Sol:
+- Maks 100 kWh
+
+1x Vind:
+- Maks 150 kWh
+
+4x Kullkraftverk:
+- Maks 130 kWh
+- Koster 400 NOK /h
+
+### Fabrikker
+
+Økologisk gjødselsfabrikk:
+- Bruker 200 kWh
+- Produserer 1t/h
+
+Fabrikk av økologiske frø:
+- Bruker 180 kWh
+- Produserer 1t/h
+
+Fabrikk for skadedyr og sykdomskontrollprodukter:
+- Bruker 220 kWh
+- Produserer 1t/h
+
+Fabrikk for jordforbedringsprodukter:
+- Bruker 190 kWh
+- Produserer 1t/h
 
