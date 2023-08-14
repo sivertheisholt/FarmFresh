@@ -53,7 +53,7 @@ namespace FarmFresh.Api.Controllers
         }
 
         /// <summary>
-        /// Activates a coal power plant
+        /// Activates a specific coal power plant
         /// </summary>
         /// <param name="id">Coal power plant index [0-3]</param>
         /// <response code="200">Ok</response>
@@ -80,7 +80,7 @@ namespace FarmFresh.Api.Controllers
             return Ok();
         }
         /// <summary>
-        /// Deactivates a coal power plant
+        /// Deactivates a specific coal power plant
         /// </summary>
         /// <param name="id">Coal power plant index [0-3]</param>
         /// <response code="200">Ok</response>
