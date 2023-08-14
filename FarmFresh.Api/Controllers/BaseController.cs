@@ -1,7 +1,6 @@
 using FarmFresh.Api.Attributes;
 using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
