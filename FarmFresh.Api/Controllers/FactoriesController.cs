@@ -12,6 +12,9 @@ namespace FarmFresh.Api.Controllers
         {
         }
 
+        /// <summary>
+        /// Retrieve the current status of all factories
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult> GetFactories()
         {

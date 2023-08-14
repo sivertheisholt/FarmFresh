@@ -13,16 +13,27 @@ namespace FarmFresh.Api.Controllers
             _simulationEnvironment = simulationEnvironment;
         }
 
+        /// <summary>
+        /// Retrieve the current status of solar panels
+        /// </summary>
         [HttpGet("solar")]
         public ActionResult GetSolar()
         {
             return Ok(_simulationEnvironment.Solar);
         }
+
+        /// <summary>
+        /// Retrieve the current status of wind mills
+        /// </summary>
         [HttpGet("wind")]
         public ActionResult GetWind()
         {
             return Ok(_simulationEnvironment.Wind);
         }
+
+        /// <summary>
+        /// Retrieve the current status of all coal power plants
+        /// </summary>
         [HttpGet("coal")]
         public async Task<ActionResult> GetCoalPowerPlants()
         {
@@ -32,6 +43,10 @@ namespace FarmFresh.Api.Controllers
             return Ok(user.CoalPowerPlants);
         }
 
+        /// <summary>
+        /// Activates a coal power plant
+        /// </summary>
+        /// <param name="id">Coal power plant index [0-3]</param>
         [HttpPatch("coal/activate")]
         public async Task<ActionResult> ActivateCoalPlant([FromQuery] int id)
         {
@@ -51,6 +66,10 @@ namespace FarmFresh.Api.Controllers
 
             return Ok();
         }
+        /// <summary>
+        /// Deactivates a coal power plant
+        /// </summary>
+        /// <param name="id">Coal power plant index [0-3]</param>
         [HttpPatch("coal/deactivate")]
         public async Task<ActionResult> DeactivateCoalPlant([FromQuery] int id)
         {

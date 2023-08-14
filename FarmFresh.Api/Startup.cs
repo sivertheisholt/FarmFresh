@@ -21,6 +21,8 @@ namespace FarmFresh.Api
             services.AddSwaggerGen(c =>
             {
                 c.OperationFilter<CustomHeaderSwaggerAttribute>();
+                var filePath = Path.Combine(AppContext.BaseDirectory, "FarmFresh.Api.xml");
+                c.IncludeXmlComments(filePath);
             });
 
             services.AddHttpContextAccessor();

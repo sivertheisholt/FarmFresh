@@ -2,7 +2,6 @@ using System.Text.Json;
 using FarmFresh.Api.DTOs;
 using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FarmFresh.Api.Controllers
@@ -15,6 +14,9 @@ namespace FarmFresh.Api.Controllers
             _simulationEnvironment = simulationEnvironment;
         }
 
+        /// <summary>
+        /// Retrieve user information
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult> GetUser()
         {
@@ -25,6 +27,10 @@ namespace FarmFresh.Api.Controllers
             return Ok(JsonSerializer.Deserialize<UserDto>(userJson));
         }
 
+        /// <summary>
+        /// Sell specific product
+        /// </summary>
+        /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
         [HttpPatch("storage/sell")]
         public async Task<ActionResult> Sell([FromQuery] int id)
         {
@@ -56,6 +62,11 @@ namespace FarmFresh.Api.Controllers
             await UnitOfWork.Complete();
             return Ok();
         }
+
+        /// <summary>
+        /// Activates a specific factory
+        /// </summary>
+        /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
         [HttpPatch("factory/activate")]
         public async Task<ActionResult> ActivateFactory([FromQuery] int id)
         {
@@ -83,6 +94,11 @@ namespace FarmFresh.Api.Controllers
             await UnitOfWork.Complete();
             return Ok();
         }
+
+        /// <summary>
+        /// Deactivates a specific factory
+        /// </summary>
+        /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
         [HttpPatch("factory/deactivate")]
         public async Task<ActionResult> DeactivateFactory([FromQuery] int id)
         {

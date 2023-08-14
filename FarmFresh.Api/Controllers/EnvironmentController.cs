@@ -14,6 +14,9 @@ namespace FarmFresh.Api.Controllers
             _simulationEnvironment = simulationEnvironment;
         }
 
+        /// <summary>
+        /// Retrieves the current status of the environment
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult> GetEnvironment()
         {
