@@ -1,3 +1,4 @@
+using FarmFresh.Api.Attributes;
 using FarmFresh.Api.Data;
 using FarmFresh.Api.Interfaces;
 using FarmFresh.Api.Services;
@@ -17,7 +18,10 @@ namespace FarmFresh.Api
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.OperationFilter<CustomHeaderSwaggerAttribute>();
+            });
 
             services.AddHttpContextAccessor();
 

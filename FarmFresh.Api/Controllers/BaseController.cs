@@ -1,7 +1,9 @@
 using FarmFresh.Api.Attributes;
+using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace FarmFresh.Api.Controllers
 {
@@ -20,5 +22,19 @@ namespace FarmFresh.Api.Controllers
         }
         protected IConfiguration Config { get { return _config; } }
         protected IUnitOfWork UnitOfWork { get { return _unitOfWork; } }
+        protected async Task<User?> GetCurrentUser()
+        {
+            try
+            {
+                HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
+                var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey!);
+                return user;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Something went wrong when getting current user");
+                return null;
+            }
+        }
     }
 }

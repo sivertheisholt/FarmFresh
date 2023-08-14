@@ -1,3 +1,4 @@
+using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -25,8 +26,7 @@ namespace FarmFresh.Api.Controllers
         [HttpGet("coal")]
         public async Task<ActionResult> GetCoalPowerPlants()
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
 
             return Ok(user.CoalPowerPlants);
@@ -35,8 +35,7 @@ namespace FarmFresh.Api.Controllers
         [HttpPatch("coal/activate")]
         public async Task<ActionResult> ActivateCoalPlant([FromQuery] int id)
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
 
             try
@@ -55,8 +54,7 @@ namespace FarmFresh.Api.Controllers
         [HttpPatch("coal/deactivate")]
         public async Task<ActionResult> DeactivateCoalPlant([FromQuery] int id)
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
 
             try

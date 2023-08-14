@@ -22,7 +22,7 @@ namespace FarmFresh.Api.Attributes
                 return;
             }
             var appSettings = context.HttpContext.RequestServices.GetRequiredService<IConfiguration>();
-            var apiKeys = appSettings["ApiKeys"].Split(";");
+            var apiKeys = appSettings["ApiKeys"]!.Split(";");
             if (!apiKeys.Any(key => key.Equals(extractedApiKey)))
             {
                 context.Result = new ContentResult()

@@ -18,8 +18,7 @@ namespace FarmFresh.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetUser()
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
 
             var userJson = JsonSerializer.Serialize(user);
@@ -29,8 +28,7 @@ namespace FarmFresh.Api.Controllers
         [HttpPatch("storage/sell")]
         public async Task<ActionResult> Sell([FromQuery] int id)
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
 
             var price = _simulationEnvironment.SellPrices[id];
@@ -61,8 +59,7 @@ namespace FarmFresh.Api.Controllers
         [HttpPatch("factory/activate")]
         public async Task<ActionResult> ActivateFactory([FromQuery] int id)
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
 
             switch (id)
@@ -89,8 +86,7 @@ namespace FarmFresh.Api.Controllers
         [HttpPatch("factory/deactivate")]
         public async Task<ActionResult> DeactivateFactory([FromQuery] int id)
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
 
             switch (id)
@@ -115,6 +111,7 @@ namespace FarmFresh.Api.Controllers
             return Ok();
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         public async Task<ActionResult> CreateUser(NewUserDto newUserDto)
         {

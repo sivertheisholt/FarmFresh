@@ -1,5 +1,6 @@
 using System.Text.Json;
 using FarmFresh.Api.DTOs;
+using FarmFresh.Api.Entities;
 using FarmFresh.Api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,8 +15,7 @@ namespace FarmFresh.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetFactories()
         {
-            HttpContext.Request.Headers.TryGetValue("ApiKey", out var extractedApiKey);
-            var user = await UnitOfWork.UserRepository.GetUserByUid(extractedApiKey);
+            User? user = await GetCurrentUser();
             if (user == null) return NotFound();
             List<FactoryDto> factories = new();
 
