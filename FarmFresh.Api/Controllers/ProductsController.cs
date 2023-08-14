@@ -16,6 +16,10 @@ namespace FarmFresh.Api.Controllers
         /// Sell specific product
         /// </summary>
         /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
+        /// <response code="200">Ok</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpPatch("sell")]
         public async Task<ActionResult> Sell([FromQuery] int id)
         {

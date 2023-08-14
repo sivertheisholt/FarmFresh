@@ -17,6 +17,9 @@ namespace FarmFresh.Api.Controllers
         /// <summary>
         /// Retrieves the current status of the environment
         /// </summary>
+        /// <response code="200">Ok</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpGet]
         public async Task<ActionResult> GetEnvironment()
         {

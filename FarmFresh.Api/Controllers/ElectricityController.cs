@@ -16,6 +16,9 @@ namespace FarmFresh.Api.Controllers
         /// <summary>
         /// Retrieve the current status of solar panels
         /// </summary>
+        /// <response code="200">Ok</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpGet("solar")]
         public ActionResult GetSolar()
         {
@@ -25,6 +28,9 @@ namespace FarmFresh.Api.Controllers
         /// <summary>
         /// Retrieve the current status of wind mills
         /// </summary>
+        /// <response code="200">Ok</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpGet("wind")]
         public ActionResult GetWind()
         {
@@ -34,6 +40,9 @@ namespace FarmFresh.Api.Controllers
         /// <summary>
         /// Retrieve the current status of all coal power plants
         /// </summary>
+        /// <response code="200">Ok</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpGet("coal")]
         public async Task<ActionResult> GetCoalPowerPlants()
         {
@@ -47,6 +56,10 @@ namespace FarmFresh.Api.Controllers
         /// Activates a coal power plant
         /// </summary>
         /// <param name="id">Coal power plant index [0-3]</param>
+        /// <response code="200">Ok</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpPatch("coal/activate")]
         public async Task<ActionResult> ActivateCoalPlant([FromQuery] int id)
         {
@@ -70,6 +83,10 @@ namespace FarmFresh.Api.Controllers
         /// Deactivates a coal power plant
         /// </summary>
         /// <param name="id">Coal power plant index [0-3]</param>
+        /// <response code="200">Ok</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpPatch("coal/deactivate")]
         public async Task<ActionResult> DeactivateCoalPlant([FromQuery] int id)
         {

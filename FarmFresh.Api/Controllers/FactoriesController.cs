@@ -15,6 +15,9 @@ namespace FarmFresh.Api.Controllers
         /// <summary>
         /// Retrieve the current status of all factories
         /// </summary>
+        /// <response code="200">Ok</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpGet]
         public async Task<ActionResult> GetFactories()
         {
@@ -41,6 +44,10 @@ namespace FarmFresh.Api.Controllers
         /// Activates a specific factory
         /// </summary>
         /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
+        /// <response code="200">Ok</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpPatch("activate")]
         public async Task<ActionResult> ActivateFactory([FromQuery] int id)
         {
@@ -73,6 +80,10 @@ namespace FarmFresh.Api.Controllers
         /// Deactivates a specific factory
         /// </summary>
         /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
+        /// <response code="200">Ok</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="401">Unauthorized</response>
+        /// <response code="404">No Found</response>
         [HttpPatch("deactivate")]
         public async Task<ActionResult> DeactivateFactory([FromQuery] int id)
         {
