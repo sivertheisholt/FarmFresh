@@ -36,5 +36,69 @@ namespace FarmFresh.Api.Controllers
 
             return Ok(factories);
         }
+
+        /// <summary>
+        /// Activates a specific factory
+        /// </summary>
+        /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
+        [HttpPatch("activate")]
+        public async Task<ActionResult> ActivateFactory([FromQuery] int id)
+        {
+            User? user = await GetCurrentUser();
+            if (user == null) return NotFound();
+
+            switch (id)
+            {
+                case 0:
+                    user.OrganicFertilizerFactory.Active = true;
+                    break;
+                case 1:
+                    user.OrganicSeedsFactory.Active = true;
+                    break;
+                case 2:
+                    user.PestAndDiseaseFactory.Active = true;
+                    break;
+                case 3:
+                    user.SoilAmendmentsFactory.Active = true;
+                    break;
+                default:
+                    return BadRequest("Invalid id");
+            }
+
+            await UnitOfWork.Complete();
+            return Ok();
+        }
+
+        /// <summary>
+        /// Deactivates a specific factory
+        /// </summary>
+        /// <param name="id">0 = Organic Fertilizer, 1 = Organic Seeds, 2 = Pest And Disease, 3 = Soil Amendments</param>
+        [HttpPatch("deactivate")]
+        public async Task<ActionResult> DeactivateFactory([FromQuery] int id)
+        {
+            User? user = await GetCurrentUser();
+            if (user == null) return NotFound();
+
+            switch (id)
+            {
+                case 0:
+                    user.OrganicFertilizerFactory.Active = false;
+                    break;
+                case 1:
+                    user.OrganicSeedsFactory.Active = false;
+                    break;
+                case 2:
+                    user.PestAndDiseaseFactory.Active = false;
+                    break;
+                case 3:
+                    user.SoilAmendmentsFactory.Active = false;
+                    break;
+                default:
+                    return BadRequest("Invalid id");
+            }
+
+            await UnitOfWork.Complete();
+            return Ok();
+        }
     }
 }
